@@ -1,0 +1,47 @@
+<% include ./partials/header %>
+
+  <body>
+    <div class="fixed-container">
+      <h3>Mars Curiosity Rover Photo Search</h3>
+      <fieldset>
+        <form action="/search" method="post" id="search-form">
+          <label for="sol">Sol</label>
+          <input name="sol" id="sol" type="number" min="1" value="1" required>
+          <label for="cam">Camera</label>
+          <select name="cam" id="cam">
+            <!-- <option value="Any">Any</option> -->
+            <option value="FHAZ">FHAZ</option>
+            <option value="RHAZ">RHAZ</option>
+            <option value="MAST">MAST</option>
+            <option value="CHEMCHAM">CHEMCHAM</option>
+            <option value="MAHLI">MAHLI</option>
+            <option value="MARDI" >MARDI</option>
+            <option value="NAVCAM" <% if(prevQuery.cam == 'NAVCAM') 'selected' %>>NAVCAM</option>
+          </select>
+          <button class="search" form="search-form">Find Photos</button>
+        </form>
+      </fieldset>
+      <% if(prevQuery) { %>
+        <% include ./partials/resultDetails %>
+        <% include ./partials/pageNav %>
+      <% } %>
+    </div>
+
+      <div class="results-outer-container">
+      <% if(data) { %>
+        <% data.forEach( (result) => { %>
+          <div class='result-item-container'>
+            <a href="<%=result.img_src%>">
+              <img src="<%= result.img_src %>">
+            </a>
+          </div>
+        <% }) %>
+    <% } else if(prevQuery) { %>
+      <div>There are no photos to show</div>
+    <% } else {%>
+      <div>Search for photos</div>
+    <% } %>
+    </div>
+  <script type="text/javascript" src="/scripts/index.js"></script>
+  </body>
+</html>

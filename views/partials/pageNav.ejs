@@ -1,0 +1,49 @@
+<div class="nav-container">
+  <% if(prevQuery.page > 1) { %>
+    <a class="goto-prev" href="">Previous Page</a>
+  <% } else { %>
+    <div></div>
+  <% } %>
+  <% if(prevQuery.page > 1 || hasMoreResults) { %>
+    <div class="goto-container">
+      <input type="number" min="1" max="">
+      <a class="goto-page" href="">Jump to Page</a>
+    </div>
+  <% } %>
+  <% if(hasMoreResults) { %>
+    <a class="goto-next" href="">Next Page</a>
+  <% } else { %>
+    <div></div>
+  <% } %>
+</div>
+<div class="hidden-forms">
+  <!--PREV Page -->
+  <fieldset>
+    <form id="prev-page-form" action="/search" method="post">
+      <input name="sol" id="sol" type="number" min="0" value="0" required>
+      <input name="cam" id="cam">
+      <input name="page" id="page">
+      <button class="prev-page-button">PREV PAGE</button>
+    </form>
+  </fieldset>
+  <!-- GOTO Specific Page -->
+  <fieldset>
+    <form id="goto-page-form" action="/search" method="post">
+      <input name="sol" id="sol" type="number" min="0" value="0" required>
+      <input name="cam" id="cam">
+      <input name="page" id="page">
+      <button class="goto-page-button">GOTO PAGE</button>
+    </form>
+  </fieldset>
+  <!-- NEXT Page -->
+  <% if(prevQuery.page >= 1) { %>
+  <fieldset>
+    <form id="next-page-form" action="/search" method="post">
+      <input name="sol" id="sol" type="number" min="0" value="0" required>
+      <input name="cam" id="cam">
+      <input name="page" id="page">
+      <button class="next-page-button">NEXT PAGE</button>
+    </form>
+  </fieldset>
+  <% } %>
+</div>

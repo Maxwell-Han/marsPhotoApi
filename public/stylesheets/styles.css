@@ -1,0 +1,82 @@
+html,
+body {
+  margin: 0;
+  padding: 0 ;
+  height: 100%;
+  box-sizing: border-box;
+  height: auto;
+  font-family: 'Space Mono', monospace;
+  background-color: #ececec;
+}
+
+h3 {
+  color: red;
+  margin: 0 auto;
+  text-align: center;
+
+  z-index: 100
+}
+
+.fixed-container {
+  padding: 1vh 0 0.5vh 0;
+  background-color: #dec9b4;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.fixed-container fieldset {
+  margin: 0.5vw;
+  text-align: center;
+}
+
+.results-outer-container {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: auto;
+  width: 80vw;
+  margin: 21vh auto;
+  padding: 2vh 0vh 2vh 0vh;
+  grid-row-gap: 1.3vh;
+}
+
+.result-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 80vw;
+  height: auto;
+}
+
+.result-item-container img {
+  width: 50vw;
+}
+/* Page Navigation Styles */
+.nav-container, .result-details-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.result-details-container {
+  margin-top: 1.2vh;
+}
+.nav-container {
+  padding-top: 1vh;
+}
+
+.goto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goto-container input {
+  width: 3vw;
+}
+
+/* Hidden Forms */
+.hidden-forms {
+  display: none;
+}
