@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
 })
 
 //GET Using start idx
-app.post('/search', function (req, res) {
+app.post('/search', function (req, res, next) {
   let searchPage = req.body.page || 1
   let searchSol = req.body.sol
   let searchCam = req.body.cam
@@ -28,8 +28,9 @@ app.post('/search', function (req, res) {
     sol: searchSol,
     cam: searchCam
   }
-  console.log(searchPage, searchSol, searchCam)
+
   let url = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${searchSol}&camera=${searchCam}&page=${searchPage}&api_key=DEMO_KEY`
+  console.log(searchPage, searchSol, searchCam, url)
   let hasResults = false
   let hasMoreResults = false
   let len = 0
@@ -37,17 +38,19 @@ app.post('/search', function (req, res) {
      if(err){
        console.log('we have an error')
        console.log('error:', JSON.parse(err))
-       res.send(err)
+       res.render('index', {
+         data: null,
+         prevQuery: true,
+         hasResults: false,
+         hasMoreResults: false,
+         error: null
+       })
      }else{
-       console.log('hello from the search page route using idx')
-       let results = JSON.parse(body).photos //returns an array of objs
-       console.log(typeof results, results)
-
+       let results = JSON.parse(body).photos || [] //returns an array of objs
        if(results.length == 25) hasMoreResults = true
        if(results.length > 1) hasResults = true
-       console.log(prevQuery, 'has more results val: ', hasMoreResults)
+       console.log(prevQuery, 'hasResultsVal = ', hasResults, 'has more results val: ', hasMoreResults)
 
-       // let results = JSON.parse(body).items.map( arr => arr)
        res.render('index', {
          data: results,
          prevQuery,
@@ -58,6 +61,7 @@ app.post('/search', function (req, res) {
      }
    })
 })
+
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {

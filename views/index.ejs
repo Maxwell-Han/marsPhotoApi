@@ -26,8 +26,10 @@
         <% include ./partials/pageNav %>
       <% } %>
     </div>
-
-      <div class="results-outer-container">
+    <div class="results-outer-container">
+    <% if(prevQuery && !hasResults) { %>
+      <div>There are no photos to show</div>
+    <% } %>
       <% if(data) { %>
         <% data.forEach( (result) => { %>
           <div class='result-item-container'>
@@ -36,8 +38,6 @@
             </a>
           </div>
         <% }) %>
-    <% } else if(prevQuery) { %>
-      <div>There are no photos to show</div>
     <% } else {%>
       <div>Search for photos</div>
     <% } %>
